@@ -25,22 +25,22 @@ public class AuthorController {
     }
 
     @GetMapping("/get/byId/{authorId}")
-    public ResponseEntity<AuthorDto> getAuthorById(@PathVariable long authorId){
-        return new ResponseEntity<>(authorService.getAuthorById(authorId),HttpStatus.OK);
+    public ResponseEntity<AuthorDto> getAuthorById(@PathVariable long authorId) {
+        return new ResponseEntity<>(authorService.getAuthorById(authorId), HttpStatus.OK);
     }
 
     @PostMapping("/post")
-    public ResponseEntity<AuthorDto> createAuthor(@RequestBody AuthorDto authorDto){
-        return new ResponseEntity<>(authorService.createAuthorData(authorDto),HttpStatus.CREATED);
+    public ResponseEntity<AuthorDto> createAuthor(@RequestBody AuthorDto authorDto) {
+        return new ResponseEntity<>(authorService.createAuthorData(authorDto), HttpStatus.CREATED);
     }
 
     @PutMapping("/put/{authorId}")
-    public ResponseEntity<String> updateAuthor(@PathVariable long authorId,@RequestBody AuthorDto authorDto){
-        return new ResponseEntity<>(authorService.updateAuthorData(authorId,authorDto),HttpStatus.OK);
+    public ResponseEntity<String> updateAuthor(@PathVariable long authorId, @RequestBody AuthorDto authorDto) {
+        return new ResponseEntity<>(authorService.updateAuthorData(authorId, authorDto), HttpStatus.OK);
     }
 
     @DeleteMapping("/delete/{authorId}")
-    public ResponseEntity<String> deleteAuthor(@PathVariable long authorId){
-        return new ResponseEntity<>(authorService.deleteAuthorData(authorId),HttpStatus.NO_CONTENT);
+    public ResponseEntity<String> deleteAuthor(@PathVariable long authorId) {
+        return new ResponseEntity<>(authorService.deleteAuthorData(authorId), HttpStatus.NO_CONTENT);
     }
 }

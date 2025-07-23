@@ -37,31 +37,31 @@ public class AuthorService {
 
 
     public AuthorDto createAuthorData(AuthorDto authorDto) {
-        Author author = modelMapper.map(authorDto,Author.class);
-        return modelMapper.map(authorRepo.save(author),AuthorDto.class);
+        Author author = modelMapper.map(authorDto, Author.class);
+        return modelMapper.map(authorRepo.save(author), AuthorDto.class);
     }
 
 
-    public String updateAuthorData(long authorId,AuthorDto authorDto) {
+    public String updateAuthorData(long authorId, AuthorDto authorDto) {
         Author author = authorRepo.findById(authorId)
-                .orElseThrow(()->new AuthorNotFoundException("Author does not exist!"));
-        if(authorDto.getAuthorName()!=null){
+                .orElseThrow(() -> new AuthorNotFoundException("Author does not exist!"));
+        if (authorDto.getAuthorName() != null) {
             author.setAuthorName(authorDto.getAuthorName());
         }
-        if(authorDto.getAuthorBiography()!=null){
+        if (authorDto.getAuthorBiography() != null) {
             author.setAuthorBiography(authorDto.getAuthorBiography());
         }
-        if(authorDto.getAuthorDob()!=null){
+        if (authorDto.getAuthorDob() != null) {
             author.setAuthorDob(authorDto.getAuthorDob());
         }
-        modelMapper.map(authorRepo.save(author),AuthorDto.class);
+        modelMapper.map(authorRepo.save(author), AuthorDto.class);
         return "Author updated successfully!";
     }
 
 
     public String deleteAuthorData(long authorId) {
         Author author = authorRepo.findById(authorId)
-                .orElseThrow(()->new AuthorNotFoundException("Author does not exist!"));
+                .orElseThrow(() -> new AuthorNotFoundException("Author does not exist!"));
         authorRepo.deleteById(authorId);
         return "Author deleted successfully!";
     }
