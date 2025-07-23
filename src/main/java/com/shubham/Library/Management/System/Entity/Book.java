@@ -25,7 +25,7 @@ public class Book {
     @JsonBackReference
     private Publisher publisher;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "bookCategory",
             joinColumns = @JoinColumn(name = "bookId"),

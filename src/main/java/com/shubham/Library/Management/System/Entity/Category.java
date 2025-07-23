@@ -13,7 +13,7 @@ public class Category {
     private String categoryName;
     private String categoryDesc;
 
-    @ManyToMany(mappedBy = "categories", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToMany(mappedBy = "categories", cascade = {CascadeType.PERSIST, CascadeType.MERGE},fetch = FetchType.EAGER)
     @JsonManagedReference
     private List<Book> books;
 
