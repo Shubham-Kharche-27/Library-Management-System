@@ -2,6 +2,7 @@ package com.shubham.Library.Management.System.Service;
 
 import com.shubham.Library.Management.System.Dto.AuthorDto;
 import com.shubham.Library.Management.System.Entity.Author;
+import com.shubham.Library.Management.System.Exception.AuthorNotFoundException;
 import com.shubham.Library.Management.System.Repository.AuthorRepo;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +13,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 @Service
-public class AuthorService implements ApiService{
+public class AuthorService {
 
     @Autowired
     private AuthorRepo authorRepo;
@@ -21,29 +22,29 @@ public class AuthorService implements ApiService{
     private ModelMapper modelMapper;
 
 
-    @Override
     public Page<AuthorDto> getAllAuthorData(int pageNum, int pageSize, String sortBy) {
-        Pageable pageable = PageRequest.of(pageNum,pageSize, Sort.by(sortBy));
+        Pageable pageable = PageRequest.of(pageNum, pageSize, Sort.by(sortBy));
         Page<Author> authorPage = authorRepo.findAll(pageable);
-        return authorPage.map(Author->modelMapper.map(Author,AuthorDto.class));
+        return authorPage.map(Author -> modelMapper.map(Author, AuthorDto.class));
     }
 
-    @Override
-    public AuthorDto getAuthorById() {
-        return null;
+
+    public AuthorDto getAuthorById(long authorId) {
+        Author author = authorRepo.findById(authorId).orElseThrow(() -> new AuthorNotFoundException("Author does not exist"));
+        return modelMapper.map(author, AuthorDto.class);
     }
 
-    @Override
+
     public AuthorDto createAuthorData() {
         return null;
     }
 
-    @Override
+
     public String updateAuthorData() {
         return "";
     }
 
-    @Override
+
     public String deleteAuthorData() {
         return "";
     }
