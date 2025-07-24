@@ -8,7 +8,6 @@ public class AuthorDto {
     private String authorName;
     private String authorBiography;
     private LocalDate authorDob;
-    private List<BookDto> books;
 
     public long getAuthorId() {
         return authorId;
@@ -40,13 +39,5 @@ public class AuthorDto {
 
     public void setAuthorDob(LocalDate authorDob) {
         this.authorDob = authorDob;
-    }
-
-    public List<BookDto> getBooks() {
-        return books;
-    }
-
-    public void setBooks(List<BookDto> books) {
-        this.books = books;
     }
 }

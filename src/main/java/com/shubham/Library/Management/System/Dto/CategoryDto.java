@@ -7,7 +7,6 @@ public class CategoryDto {
     private long categoryId;
     private String categoryName;
     private String categoryDesc;
-    private List<BookDto> books;
 
     public long getCategoryId() {
         return categoryId;
@@ -31,13 +30,5 @@ public class CategoryDto {
 
     public void setCategoryDesc(String categoryDesc) {
         this.categoryDesc = categoryDesc;
-    }
-
-    public List<BookDto> getBooks() {
-        return books;
-    }
-
-    public void setBooks(List<BookDto> books) {
-        this.books = books;
     }
 }

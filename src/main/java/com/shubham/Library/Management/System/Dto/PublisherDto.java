@@ -8,7 +8,6 @@ public class PublisherDto {
     private String publisherName;
     private String publisherAddress;
     private long publisherContactNum;
-    private List<BookDto> books;
 
     public long getPublisherId() {
         return publisherId;
@@ -40,13 +39,5 @@ public class PublisherDto {
 
     public void setPublisherContactNum(long publisherContactNum) {
         this.publisherContactNum = publisherContactNum;
-    }
-
-    public List<BookDto> getBooks() {
-        return books;
-    }
-
-    public void setBooks(List<BookDto> books) {
-        this.books = books;
     }
 }

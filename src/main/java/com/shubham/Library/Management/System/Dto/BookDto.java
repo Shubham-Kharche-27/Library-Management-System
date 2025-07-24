@@ -8,8 +8,8 @@ public class BookDto {
     private long bookId;
     private String bookTitle;
     private LocalDate publicationDate;
-    private AuthorDto authorDto;
-    private PublisherDto publisherDto;
+    private long authorId;
+    private long publisherId;
     private List<CategoryDto> categories;
 
     public long getBookId() {
@@ -36,20 +36,20 @@ public class BookDto {
         this.publicationDate = publicationDate;
     }
 
-    public AuthorDto getAuthorDto() {
-        return authorDto;
+    public long getAuthorId() {
+        return authorId;
     }
 
-    public void setAuthorDto(AuthorDto authorDto) {
-        this.authorDto = authorDto;
+    public void setAuthorId(long authorId) {
+        this.authorId = authorId;
     }
 
-    public PublisherDto getPublisherDto() {
-        return publisherDto;
+    public long getPublisherId() {
+        return publisherId;
     }
 
-    public void setPublisherDto(PublisherDto publisherDto) {
-        this.publisherDto = publisherDto;
+    public void setPublisherId(long publisherId) {
+        this.publisherId = publisherId;
     }
 
     public List<CategoryDto> getCategories() {
