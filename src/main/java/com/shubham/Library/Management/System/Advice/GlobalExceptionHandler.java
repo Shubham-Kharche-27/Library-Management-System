@@ -1,9 +1,6 @@
 package com.shubham.Library.Management.System.Advice;
 
-import com.shubham.Library.Management.System.Exception.AuthorNotFoundException;
-import com.shubham.Library.Management.System.Exception.BookNotFoundException;
-import com.shubham.Library.Management.System.Exception.CategoryNotFoundException;
-import com.shubham.Library.Management.System.Exception.PublisherNotFoundException;
+import com.shubham.Library.Management.System.Exception.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -30,6 +27,11 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(CategoryNotFoundException.class)
     public ResponseEntity<String> handleGlobalException(CategoryNotFoundException ex) {
         return new ResponseEntity<>(ex.getMessage(), HttpStatus.NO_CONTENT);
+    }
+
+    @ExceptionHandler(BookExistException.class)
+    public ResponseEntity<String> handleGlobalException(BookExistException ex){
+        return new ResponseEntity<>(ex.getMessage(),HttpStatus.CONFLICT);
     }
 
     @ExceptionHandler(Exception.class)

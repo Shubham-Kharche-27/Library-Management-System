@@ -47,7 +47,7 @@ public class PublisherService {
         if (publisherDto.getPublisherAddress() != null) {
             publisher.setPublisherAddress(publisherDto.getPublisherAddress());
         }
-        if (publisherDto.getPublisherContactNum() != 0) {
+        if (publisherDto.getPublisherContactNum() != null) {
             publisher.setPublisherContactNum(publisherDto.getPublisherContactNum());
         }
         publisherRepo.save(publisher);

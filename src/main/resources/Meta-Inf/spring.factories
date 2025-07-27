@@ -1,0 +1,2 @@
+org.springframework.boot.env.EnvironmentPostProcessor=\
+com.shubham.Library.Management.System.Configuration.EnvLoader

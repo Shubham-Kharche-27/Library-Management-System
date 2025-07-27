@@ -1,13 +1,23 @@
 package com.shubham.Library.Management.System.Dto;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class PublisherDto {
     private long publisherId;
     private String publisherName;
     private String publisherAddress;
-    private long publisherContactNum;
+    private String publisherContactNum;
+    List<BookDto> bookList = new ArrayList<>();
+
+    public List<BookDto> getBookList() {
+        return bookList;
+    }
+
+    public void setBookList(List<BookDto> bookList) {
+        this.bookList = bookList;
+    }
 
     public long getPublisherId() {
         return publisherId;
@@ -33,11 +43,11 @@ public class PublisherDto {
         this.publisherAddress = publisherAddress;
     }
 
-    public long getPublisherContactNum() {
+    public String getPublisherContactNum() {
         return publisherContactNum;
     }
 
-    public void setPublisherContactNum(long publisherContactNum) {
+    public void setPublisherContactNum(String publisherContactNum) {
         this.publisherContactNum = publisherContactNum;
     }
 }

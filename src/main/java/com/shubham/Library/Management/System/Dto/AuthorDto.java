@@ -1,6 +1,7 @@
 package com.shubham.Library.Management.System.Dto;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 public class AuthorDto {
@@ -8,6 +9,15 @@ public class AuthorDto {
     private String authorName;
     private String authorBiography;
     private LocalDate authorDob;
+    List<BookDto> bookList = new ArrayList<>();
+
+    public List<BookDto> getBookList() {
+        return bookList;
+    }
+
+    public void setBookList(List<BookDto> bookList) {
+        this.bookList = bookList;
+    }
 
     public long getAuthorId() {
         return authorId;

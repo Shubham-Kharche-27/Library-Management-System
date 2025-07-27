@@ -30,7 +30,7 @@ public class BookController {
     }
 
     @PostMapping("/post")
-    public ResponseEntity<BookDto> createBook(@RequestBody BookDto bookDto) {
+    public ResponseEntity<String> createBook(@RequestBody BookDto bookDto) {
         return new ResponseEntity<>(bookService.createBookData(bookDto), HttpStatus.CREATED);
     }
 

@@ -6,10 +6,7 @@ import com.shubham.Library.Management.System.Entity.Author;
 import com.shubham.Library.Management.System.Entity.Book;
 import com.shubham.Library.Management.System.Entity.Category;
 import com.shubham.Library.Management.System.Entity.Publisher;
-import com.shubham.Library.Management.System.Exception.AuthorNotFoundException;
-import com.shubham.Library.Management.System.Exception.BookNotFoundException;
-import com.shubham.Library.Management.System.Exception.CategoryNotFoundException;
-import com.shubham.Library.Management.System.Exception.PublisherNotFoundException;
+import com.shubham.Library.Management.System.Exception.*;
 import com.shubham.Library.Management.System.Repository.AuthorRepo;
 import com.shubham.Library.Management.System.Repository.BookRepo;
 import com.shubham.Library.Management.System.Repository.CategoryRepo;
@@ -20,8 +17,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,22 +56,27 @@ public class BookService {
         return modelMapper.map(book, BookDto.class);
     }
 
-    public BookDto createBookData(BookDto bookDto) {
+    public String createBookData(BookDto bookDto) {
         Book book = modelMapper.map(bookDto, Book.class);
-        Author author = authorRepo.findById(bookDto.getAuthorId())
-                .orElseThrow(() -> new AuthorNotFoundException("Author does not exist!"));
-        Publisher publisher = publisherRepo.findById(bookDto.getPublisherId())
-                .orElseThrow(() -> new PublisherNotFoundException("Publisher does not exist!"));
-        List<Category> categoryList = new ArrayList<>();
-        for (CategoryDto categoryDto : bookDto.getCategories()) {
-            Category category = categoryRepo.findById(categoryDto.getCategoryId())
-                    .orElseThrow(() -> new CategoryNotFoundException("Category does not exist!"));
-            categoryList.add(category);
+        if(!bookRepo.existsByBookTitle(bookDto.getBookTitle())){
+            Author author = authorRepo.findById(bookDto.getAuthorId())
+                    .orElseThrow(() -> new AuthorNotFoundException("Author does not exist!"));
+            Publisher publisher = publisherRepo.findById(bookDto.getPublisherId())
+                    .orElseThrow(() -> new PublisherNotFoundException("Publisher does not exist!"));
+            List<Category> categoryList = new ArrayList<>();
+            for (CategoryDto categoryDto : bookDto.getCategories()) {
+                Category category = categoryRepo.findById(categoryDto.getCategoryId())
+                        .orElseThrow(() -> new CategoryNotFoundException("Category does not exist!"));
+                categoryList.add(category);
+            }
+            book.setAuthor(author);
+            book.setPublisher(publisher);
+            book.setCategories(categoryList);
+            modelMapper.map(bookRepo.save(book), BookDto.class);
+        }else{
+            throw new BookExistException("Book with this title already exists");
         }
-        book.setAuthor(author);
-        book.setPublisher(publisher);
-        book.setCategories(categoryList);
-        return modelMapper.map(bookRepo.save(book), BookDto.class);
+        return "Book created successfully!";
     }
 
     public String updateBookData(long bookId, BookDto bookDto) {

@@ -12,13 +12,13 @@ public class Publisher {
     private long publisherId;
     private String publisherName;
     private String publisherAddress;
-    private long publisherContactNum;
+    private String publisherContactNum;
 
     @OneToMany(mappedBy = "publisher", cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
     @JsonManagedReference
     private List<Book> books;
 
-    public Publisher(long publisherId, String publisherName, String publisherAddress, long publisherContactNum, List<Book> books) {
+    public Publisher(long publisherId, String publisherName, String publisherAddress, String publisherContactNum, List<Book> books) {
         this.publisherId = publisherId;
         this.publisherName = publisherName;
         this.publisherAddress = publisherAddress;
@@ -53,11 +53,11 @@ public class Publisher {
         this.publisherAddress = publisherAddress;
     }
 
-    public long getPublisherContactNum() {
+    public String getPublisherContactNum() {
         return publisherContactNum;
     }
 
-    public void setPublisherContactNum(long publisherContactNum) {
+    public void setPublisherContactNum(String publisherContactNum) {
         this.publisherContactNum = publisherContactNum;
     }
 
